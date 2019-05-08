@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+ 
+<style>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i');
+body {
+    background-color: gray;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #eee;
+    shape-rendering: crispEdges;
+}
+ 
+.axis text {
+    color: white;
+    font-family: 'Roboto Mono';
+    font-size: 11px;
+}
+ 
+.loading {
+    font-family: 'Roboto Mono';
+    font-size: 15px;
+}
+ 
+.circle {
+    fill: rgba(0, 0, 0, .5);
+    stroke: white;
+}
+
+div.tooltip {	
+		    position: absolute;			
+		    text-align: center;			
+		    width: 120px;					
+		    height: auto;					
+		    padding: 5px;
+		    color: white;				
+		    font: 12px 'Roboto Mono';		
+		    background: black;	
+            border: 1px solid white;
+		    border-radius: 5px;			
+		    pointer-events: none;			
+		}
+</style>
+ 
+ 
+<div id="punchcard"></div>
+ 
+<script src="http://d3js.org/d3.v2.min.js"></script>
+<script src="./script.js"></script>

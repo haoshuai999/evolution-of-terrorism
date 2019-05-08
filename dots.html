@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<body>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = 1200,
+    height = 500;
+
+var nodes1 = [];
+var nodes2 = [];
+
+var color1 = '#00FF00';
+var color2 = '#FF0000';
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var force = d3.layout.force()
+    .charge(-20)
+    .size([width, height])
+    .nodes(nodes1)
+    .on("tick", tick)
+    .start();
+
+var force2 = d3.layout.force()
+    .charge(-20)
+    .size([width, height])
+    .nodes(nodes2)
+    .on("tick", tick)
+    .start();
+
+function tick() {
+  svg.selectAll(".class1")
+      .attr("cx", function(data1) { return data1.x - 300; })
+      .attr("cy", function(data1) { return data1.y; });
+  svg.selectAll(".class2")
+      .attr("cx", function(data2) { return data2.x + 100; })
+      .attr("cy", function(data2) { return data2.y; });
+}
+
+var interval = setInterval(function() {
+  var data1 = {
+    x: width / 2 + 2 * Math.random() - 1,
+    y: height / 2 + 2 * Math.random() - 1
+  };
+  var data2 = {
+    x: width / 2 + 2 * Math.random() - 1,
+    y: height / 2 + 2 * Math.random() - 1
+  };
+
+  svg.append("circle")
+      .data([data1])
+      .attr("r", 1e-6)
+      .attr('class', 'class1')
+    .transition()
+      .ease(Math.sqrt)
+      .attr("r", 4.5);
+
+  svg.append("circle")
+      .data([data2])
+      .attr("r", 1e-6)
+      .attr('class', 'class2')
+    .transition()
+      .ease(Math.sqrt)
+      .attr("r", 4.5);
+
+  svg.selectAll('.class1')
+    .attr('fill', color1)
+
+  svg.selectAll('.class2')
+    .attr('fill', color2)
+
+  if (nodes1.push(data1) > 100) clearInterval(interval);
+  if (nodes2.push(data2) > 100) clearInterval(interval);
+  force.start();
+  force2.start();
+}, 1);
+
+</script>
+</body>
+</html>
